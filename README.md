@@ -53,11 +53,11 @@ Then initialize the player and use as in following example:
 
 ```c++
 player.begin();
+player.switchToMp3Mode();
 if (player.getChipVersion() == 4) { // Only perform an update if we really are using a VS1053, not. eg. VS1003
     player.loadDefaultVs1053Patches(); 
 }
 player.setVolume(VOLUME);
-player.switchToMp3Mode();
 player.playChunk(sampleMp3, sizeof(sampleMp3));
 ```
     
@@ -89,6 +89,23 @@ A lot of the VS1003 and VS1053 devices completely look the same. They are even b
 Above example and self-explanatory method name tells everything. It simply provides current decoded time in full seconds (from `SCI_DECODE_TIME` register value).
 
 Optionally available is also `player.clearDecodedTime()` which clears decoded time (sets `SCI_DECODE_TIME` register to `0x00`).
+
+##### Enable I2S output
+
+```
+player.enableI2sOut(/* i2sRate: optional sampling rate, default is 48kHz */);
+player.disableI2sOut();
+```
+I2S output of the VS1053 chip can be enabled/disabled using methods `enableI2sOut` and `disableI2sOut`. When enabled, the gpio lines won't be available for other purposes. On reset the I2S output is disabled. The assignment to I2S lines is according to the table below:
+
+|  VS1053 GPIO | I2S            |
+|--------------|----------------|
+| 4            | LROUT / WSEL   |
+| 5            | MCLCK          |
+| 6            | SCLK / BCLK    |
+| 7            | SDATA / DOUT   |
+
+Refer to the [VS1053 datasheet](https://www.vlsi.fi/fileadmin/datasheets/vs1053.pdf) for details: the pin assignment is specified in section 5.1 on page 12, the I2S DAC interface is described in section 11.14 on page 83.
 
 #### Logging / debugging
 
