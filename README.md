@@ -1,6 +1,8 @@
 # VS1053 library
 
 This is a PlatformIO library for the generic **[VS1053 Breakout](http://www.vlsi.fi/en/products/vs1053.html)** by VLSI Solution.<br/>
+It is forked from baldram/ESP_VS1053_Library which itself is forked from the Internet radio project Edzelf/Esp-radio.
+The main diffrence is that the MIDI capabilty of the VS1053 is used in this library and an example is given. For all other purposes it's recommended to use the original library.
 A powerful Ogg Vorbis / MP3 / AAC / WMA / FLAC / MIDI Audio Codec chip.<br/>
 Read more: [http://www.vlsi.fi/en/products/vs1053.html](http://www.vlsi.fi/en/products/vs1053.html).
 
